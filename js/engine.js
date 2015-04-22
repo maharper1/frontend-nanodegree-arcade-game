@@ -80,7 +80,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
     }
 
     /* This is called by the update function  and loops through all of the
@@ -95,6 +95,27 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
+    }
+
+    /* checkCollisions first checks if the enemy and player are in the same row.
+     * If they are in the same row, it then checks to see if they overlap in the horizontal.
+     * If there is a collision, one life is subtracted or if no lives remain, the game restarts.
+    */
+    function checkCollisions() {
+        allEnemies.forEach(function(enemy) {
+            if (enemy.row == player.row){
+                if ((enemy.x + enemy.width) >= (player.x + player.padding) &&
+                    (enemy.x + enemy.padding) <= (player.x + player.width)) {
+                    player.lives--;
+                    if(player.lives == 0){
+                        player.reset("Game Over! Restarting...");
+                        player.lives = 5;
+                    } else {
+                        player.reset("You died!");
+                    }
+                }
+            }
+        });
     }
 
     /* This function initially draws the "game level", it will then call
@@ -135,8 +156,6 @@ var Engine = (function(global) {
                 ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
             }
         }
-
-
         renderEntities();
     }
 
@@ -151,7 +170,6 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
-
         player.render();
     }
 

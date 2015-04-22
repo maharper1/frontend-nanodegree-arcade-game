@@ -2,12 +2,41 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Effective JavaScript: Frogger</title>
+    <title>Splat!</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>
+
+<!-- Dialog box for Game Options -->
+	<div class="html5-dialog">
+		<dialog id="optionsDialog">
+			<h3>Game Options</h3>
+
+			<button id="exitDialog">Exit</button>
+		</dialog>
+		<button id="showDialog">Game Options</button>
+	</div>
+
+<script>
+	(function() {
+	   	var dialog = document.getElementById("optionsDialog");
+	   	// Add the options
+	   	options.forEach(function(option) {
+	   		dialog.insertBefore(option, document.getElementById("exitDialog"));
+	   	});
+		document.getElementById("showDialog").onclick = function() {
+			dialog.show();
+		};
+		document.getElementById("exitDialog").onclick = function() {
+			dialog.close();
+			// Process changes
+			changeOptions();
+		};
+	})();
+</script>
+
 </body>
 </html>

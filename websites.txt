@@ -1,0 +1,7 @@
+Websites referenced for Project 3
+
+http://www.w3schools.com/js/js_switch.asp
+
+http://www.hongkiat.com/blog/html5-dialog-window/
+
+http://www.w3schools.com/html/html_form_input_types.asp
